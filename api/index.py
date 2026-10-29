@@ -119,7 +119,7 @@ def predict_fertilizer(data: FarmInput):
 
 @app.get("/predict-live")
 def predict_live_orbitstick(
-    token: Optional[str] = Query(default=None, description="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im9yYmlzdGlja19wb3J0YWwiLCJwdiI6IjE2Y2RiNDAzZmY3MWM4NmYiLCJpYXQiOjE3OTMyOTcwNzAsImV4cCI6MTc5MzMyNTg3MH0.NO6LycQwKSV4-txyM0COkc9BYvAY6xi6ef-RnM3ldT0"),
+    token: Optional[str] = Query(default=None, description="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im9yYmlzdGlja19wb3J0YWwiLCJwdiI6IjE2Y2RiNDAzZmY3MWM4NmYiLCJpYXQiOjE3OTMyOTgzMTMsImV4cCI6MTc5MzMyNzExM30.9RQy39nJ4feAV4wXejO1_-WY3VNrfYczBC0FpTKFdAY"),
     authorization: Optional[str] = Header(default=None)
 ):
     try:
