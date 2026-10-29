@@ -118,10 +118,33 @@ def predict_fertilizer(data: FarmInput):
 
 
 @app.get("/predict-live")
-def predict_live_orbitstick():
+def predict_live_orbitstick(
+    token: Optional[str] = Query(default=None, description="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im9yYmlzdGlja19wb3J0YWwiLCJwdiI6IjE2Y2RiNDAzZmY3MWM4NmYiLCJpYXQiOjE3OTMyOTcwNzAsImV4cCI6MTc5MzMyNTg3MH0.NO6LycQwKSV4-txyM0COkc9BYvAY6xi6ef-RnM3ldT0"),
+    authorization: Optional[str] = Header(default=None)
+):
     try:
         orbitstick_api_url = "https://orbistick.orbitani.com/api/orbistick-portal/readings?limit=1"
-        api_response = requests.get(orbitstick_api_url, timeout=10)
+        
+        # Mengambil token dari URL Query, Header, atau Environment Variable Vercel (ORBITSTICK_TOKEN)
+        auth_token = token or os.environ.get("ORBITSTICK_TOKEN")
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0",
+            "Accept": "application/json"
+        }
+        
+        if authorization:
+            headers["Authorization"] = authorization
+        elif auth_token:
+            # Jika token belum diawali kata 'Bearer ', tambahkan otomatis
+            headers["Authorization"] = auth_token if auth_token.startswith("Bearer ") else f"Bearer {auth_token}"
+
+        # Jika portal menggunakan Cookie (opsional, diset via env ORBITSTICK_COOKIE)
+        orbit_cookie = os.environ.get("ORBITSTICK_COOKIE")
+        if orbit_cookie:
+            headers["Cookie"] = orbit_cookie
+
+        api_response = requests.get(orbitstick_api_url, headers=headers, timeout=10)
         api_response.raise_for_status()
 
         json_data = api_response.json()
