@@ -118,7 +118,10 @@ def predict_fertilizer(data: FarmInput):
 
 
 @app.get("/predict-live")
-def predict_live_orbitstick():
+def predict_live_orbitstick(
+    token: Optional[str] = Query(default=None, description="Bearer Token Orbitstick yang diambil secara dinamis dari Environment Variables"),
+    authorization: Optional[str] = Header(default=None)
+):
     try:
         orbitstick_api_url = "https://orbistick.orbitani.com/api/orbistick-portal/readings?limit=1"
         
