@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header, Query
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime, timedelta
