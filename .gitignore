@@ -1,0 +1,5 @@
+# Abaikan folder data dan file notebook
+data/
+eda.ipynb
+*.csv
+*.ipynb
