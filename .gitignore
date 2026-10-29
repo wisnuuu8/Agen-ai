@@ -1,5 +1,7 @@
-# Abaikan folder data dan file notebook
+# Abaikan dataset dan file notebook
 data/
 eda.ipynb
 *.csv
 *.ipynb
+__pycache__/
+.venv/
